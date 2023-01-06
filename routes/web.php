@@ -16,3 +16,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('users', 'UserController@index')->name('users');
+
+Route::get('create/db/{name}', 'UserController@create_db')->name('create_db');
+
