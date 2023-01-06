@@ -13,7 +13,20 @@ return new class extends Migration
      */
     public function up()
     {
+
+        // quering default DB (mysql)
         Schema::create('users', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->string('email')->unique();
+            $table->timestamp('email_verified_at')->nullable();
+            $table->string('password');
+            $table->rememberToken();
+            $table->timestamps();
+        });
+
+        // quering sqlite DB
+        Schema::connection('sqlite')->create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
@@ -31,6 +44,11 @@ return new class extends Migration
      */
     public function down()
     {
+
+        // quering default DB (mysql)
         Schema::dropIfExists('users');
+
+        // quering sqlite DB
+        Schema::connection('sqlite')->dropIfExists('users');
     }
 };
