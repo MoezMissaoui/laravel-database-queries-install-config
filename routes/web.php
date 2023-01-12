@@ -21,8 +21,8 @@ Route::get('users', 'UserController@index')->name('users');
 
 Route::get('db/transactions', 'UserController@db_transactions')->name('db_transactions');
 
-
-
-
 Route::get('db/create/{name}', 'UserController@create_db')->name('create_db');
 
+
+
+Route::get('comments', 'CommentController@index')->name('comments');
