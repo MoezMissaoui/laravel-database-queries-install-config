@@ -14,6 +14,8 @@ class CommentController extends Controller
     {
         $comments = DB::table('comments')->select()->get();
 
+        // $comments = Comment::all();
+
         dump($comments);
     }
 
