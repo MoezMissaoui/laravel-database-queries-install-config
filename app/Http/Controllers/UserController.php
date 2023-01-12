@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use PDO;
@@ -73,6 +74,63 @@ class UserController extends Controller
         $users = DB::connection('sqlite')->select('select * from users ');
         // dump('sqlite:' , $users);
         */
+    }
+
+
+
+    /**
+     *  Transactions are used
+     *  whene we make operation
+     *  on more than one table/column in the DB.
+     *  It prevents from data inconsistency
+     *
+     *  The most basic usage of this is financial transaction when the
+     *  2 tables need to be updated equals
+     *
+     */
+    public function db_transactions()
+    {
+
+        dump('transaction');
+
+        /**
+         * Transaction method will rollBack automatically DB if one of his queries
+         * has a problem or an error
+         */
+        DB::transaction(function () {
+
+            /**
+             *  It's safer to make additional checking with try catch for example.
+             *  If we catch an issue should throw an exception
+             *  and rollBack the DB.
+             */
+            try {
+
+                DB::table('users')
+                ->delete();
+
+                $result = DB::table('users')
+                ->where('id', 11)
+                ->update([
+                    'name' => 'hoalala 2'
+                ]);
+
+                /**
+                 *  Invoke an exception So should execute catch bloc
+                 *  That means rollBack DB.
+                 */
+                if (!$result) {
+                    throw new Exception('Error Updating user name.');
+                }
+
+            } catch (Exception $e) {
+                dump($e->getMessage());
+                // rollBack manually
+                DB::rollBack();
+            }
+
+        }, 5); // optional second argument, how many times a transaction should be reattempted
+
     }
 
 

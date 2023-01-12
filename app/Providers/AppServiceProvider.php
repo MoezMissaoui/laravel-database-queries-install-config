@@ -25,11 +25,11 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         // Listen to queries events
-        DB::listen(function ($query)
-        {
-            dump($query->sql);
-            dump($query->binding ?? 'no binding');
-            dump($query->time);
-        });
+        // DB::listen(function ($query)
+        // {
+        //     dump($query->sql);
+        //     dump($query->binding ?? 'no binding');
+        //     dump($query->time);
+        // });
     }
 }
