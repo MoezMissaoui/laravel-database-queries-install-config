@@ -41,7 +41,7 @@ class UserController extends Controller
         // $users = DB::select('select * from users where id = ? or name = ?', [1, "Ali's Missaoui"]); // First type of binding
         // $users = DB::select('select * from users where id = :id or name = :user_name', ['id' => 1, 'user_name' => "Ali's Missaoui"]); // Second type of binding
         $users = Db::select('select * from users');
-        dump($users);
+        // dump($users);
 
         //  DB::delete('delete from users where id = ? ', [3]);
         //  DB::statement('truncate table users');
@@ -51,13 +51,13 @@ class UserController extends Controller
         dump('Queries Builder:');
 
         $users = DB::table('users')->select()->get();
-        dump($users);
+        // dump($users);
 
         // Elequent ORM
         dump('Elequent ORM:');
 
         $users = User::all();
-        dump($users);
+        // dump($users);
 
 
 
