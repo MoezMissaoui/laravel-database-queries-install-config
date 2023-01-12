@@ -26,3 +26,5 @@ Route::get('db/create/{name}', 'UserController@create_db')->name('create_db');
 
 
 Route::get('comments', 'CommentController@index')->name('comments');
+
+Route::get('comments/factory/{comment_number}', 'CommentController@factory_comments');
